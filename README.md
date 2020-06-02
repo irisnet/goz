@@ -1,10 +1,10 @@
-# ICS-20 异常场景
+# ICS-20 Abnormal Scenes
 
-本文通过一系列连续场景展示了 IBC 协议中 ICS-20 存在的异常状况。通过 Alice、Bob、Charlie、Dave、Eve 在 gozhub、irishub、otherhub 中的交互进行说明。
+This article demonstrates the abnormal situation of ICS-20 in the IBC protocol through a series of consecutive scenes. This is illustrated by the interaction between Alice, Bob, Charlie, Dave, and Eve on gozhub, irishub, and otherhub.
 
-本场景中所有 hub 均使用 goz 第三阶段官方 gaia 版本，未修改代码。
+In those scenes, all hubs use the official gaia version of goz-phase-3, without modifying the code.
 
-## 初始状态
+## Initial state
 
 **path**
 
@@ -51,17 +51,17 @@
   - gozhub: `[]`
   - otherhub: `[]`
 
-## 场景
+## Scenes
 
-### 场景 1
+### Scene 1
 
-Alice 在 irishub 上有 10 个 `uiris`，Bob 想要购买三个。irishub 和 gozhub 已经完成了 IBC 连接，为了方便资产管理，Bob 决定所有的资产都存放在 gozhub 中，交付方式为 Alice 向 Bob 在 gozhub 中的账户进行跨链转账。
+Alice has `10uiris` on irishub, Bob wants to buy `3uiris`. IBC connection has been established between irishub and gozhub, to facilitate asset management, Bob decides that all assets are stored in the account on gozhub. The transaction method is cross-chain transfer from Alice's account on irishub to Bob's account on gozhub.
 
-Alice 实际在跨链转账中只发送了 `1uiris`，但是通过欺骗性的relay方式，成功向 Bob 在 gozhub 的账户中转入了 `3transfer/gozirischann/uiris`。但 Bob 并不知情，认为自己的 token 是没问题的。
+Alice only transferred `1uiris` via cross-chain transaction, but successfully transferred `3transfer/gozirischann/uiris` to Bob’s account on gozhub through the deceptive relay method. But Bob didn't know that and he thought his token was correct.
 
 ![scene1](/asset/scene1.png)
 
-场景结束后余额状态：
+Balance status at the end of the scene:
 
 - Alice
   - irishub: `9uiris`
@@ -84,15 +84,15 @@ Alice 实际在跨链转账中只发送了 `1uiris`，但是通过欺骗性的re
   - gozhub: `[]`
   - otherhub: `[]`
 
-### 场景 2
+### Scene 2
 
-一段时间之后，市场产生变化，Bob 和 Charlie 达成交易将手中的 `3transfer/gozirischann/uiris` 进行转让。Charlie 的资产主要在 otherhub 中，此时 otherhub 也已经和 gozhub 成功建立了连接，交付方式为 Bob 向 Charlie 在 otherhub 中的账户 进行跨链转账。
+After a period of time, the market changed and Bob and Charlie reached a deal to transfer `3transfer/gozirischann/uiris` in their hands. Charlie's assets are mainly in otherhub, and otherhub has also successfully established a connection with gozhub. The transaction method is cross-chain transfer from Bob's account on gozhub to Charlie's account on otherhub.
 
-交易结束后，Charlie 在 otherhub 的中户中成功收到了 `3transfer/othergozchann/transfer/gozirischann/uiris`。Charlie 对 Alice 和 Bob 之间的交易并不知情，并认为收到的 token 和 irishub 中的 `3uiris` 是等值的。
+After the transaction, Charlie successfully received `3transfer/othergozchann/transfer/gozirischann/uiris` on otherhub. Charlie is unaware of the transaction between Alice and Bob, and believes that the received token is equivalent to `3uiris` on irishub.
 
 ![scene2](/asset/scene2.png)
 
-场景结束后余额状态
+Balance status at the end of the scene:
 
 - Alice
   - irishub: `9uiris`
@@ -115,15 +115,15 @@ Alice 实际在跨链转账中只发送了 `1uiris`，但是通过欺骗性的re
   - gozhub: `[]`
   - otherhub: `[]`
 
-### 场景 3
+### Scene 3
 
-又过一段时间，Bob 决定将转让给 Charlie 的 token 买回，交付方式为通过跨链转账的方式将 Charlie 在 otherhub 中的 `3transfer/othergozchann/transfer/gozirischann/uiris` 转回 Bob 在 gozhub 中的账户。
+After a while, Bob decides to buy back the token transferred to Charlie. Charlie transferred `3transfer/othergozchann/transfer/gozirischann/uiris` on otherhub to Bob's account on gozhub.
 
-交易顺利完成，场景1中伪造的 token 在 IBC 网络中能够正常流通。
+The transaction was successfully completed, and the forged token in scene 1 can be circulated normally in the IBC network.
 
 ![scene3](/asset/scene3.png)
 
-场景结束后余额状态
+Balance status at the end of the scene:
 
 - Alice
   - irishub: `9uiris`
@@ -146,13 +146,13 @@ Alice 实际在跨链转账中只发送了 `1uiris`，但是通过欺骗性的re
   - gozhub: `[]`
   - otherhub: `[]`
 
-### 场景 4
+### Scene 4
 
-Dave 在 irishub 中有 `10uiris`，某天他的好友 Eve 想要借 `2uiris` 转入 gozhub 使用，两人约定通过跨链转账的方式交付。交付完成后，Eve 在 gozhub 中的账户收到 `2transfer/gozirischann/uiris`。
+Dave has `10uiris` on irishub. One day his friend Eve wants to borrow `2uiris` on gozhub. Dave transferred 2uiris on irishub to Eve's account on gozhub via cross-chain transaction. After the transaction is completed, Eve received `2transfer/gozirischann/uiris` on gozhub.
 
 ![scene4](/asset/scene4.png)
 
-场景结束后余额状态
+Balance status at the end of the scene:
 
 - Alice
   - irishub: `9uiris`
@@ -175,15 +175,15 @@ Dave 在 irishub 中有 `10uiris`，某天他的好友 Eve 想要借 `2uiris` �
   - gozhub: `2transfer/gozirischann/uiris`
   - otherhub: `[]`
 
-### 场景 5
+### Scene 5
 
-一段时间后，市场变化，Alice 同 Bob 达成交易买回 Bob 手中所有的 uiris，通过跨链转账的方式将 Bob 在 gozhub 中的 `3transfer/gozirischann/uiris` 转到 Alice 在 irishub 中的账户。交易完成后 Alice 在 irishub 中拥有 `12uiris`。
+After a period of time, the market changed, Alice bought back all Bob's uiris. Then Bob transferred `3transfer/gozirischann/uiris` on gozhub to Alice's account on irishub via cross-chain transaction. After the transaction is completed, Alice owns `12uiris` on irishub.
 
-不久之后，Eve 同 Dave 约定还款，Eve 将其在 gozhub 中的 `2transfer/gozirischann/uiris` 通过跨链方式转到 Dave 在 irishub 中的账户。Eve 在 gozhub 发送交易成功，账户余额减少 `2transfer/gozirischann/uiris`，但是 Dave 却无法收到 token，Relay packet 成功，但 execute packet 时托管账户余额不足导致失败。
+Soon after, Eve decided to pay back Dave’s uiris, then Eve transferred `2transfer/gozirischann/uiris` on gozhub to Dave’s account on irishub via cross-chain transsaction. Eve successfully sent the transaction on gozhub, the account balance decreased by `2transfer/gozirischann/uiris`. But Dave could not receive the token. Though the packet was successful relayed, the balance of escrow account was insufficient during the execution of the packet.
 
 ![scene5](/asset/scene5.png)
 
-场景结束后余额状态
+Balance status at the end of the scene:
 
 - Alice
   - irishub: `12uiris`
@@ -206,10 +206,10 @@ Dave 在 irishub 中有 `10uiris`，某天他的好友 Eve 想要借 `2uiris` �
   - gozhub: `[]`
   - otherhub: `[]`
 
-## 结论
+## Conclusion
 
-最终结果表现为 Dave 的资产无法返回，Alice 侵占了 本应属于 Dave 的 `2uiris`。
+The final result is that Dave can't get his assets back, and Alice has invaded `2uiris` which should belong to Dave.
 
-场景1中 Alice 在 gozhub 中增发的虚假 token 同正常的跨链 token 完全一致，可以在整个 IBC 网络中正常流通。
+In scene 1, the fake tokens issued by Alice on gozhub are exactly the same as normal cross-chain tokens and can be circulated normally in the entire IBC network.
 
-当跨链 token 返回原链时，能够从委托账户中释放的原生 token 数量小于对方链发行的跨链 token 总数，首先进行兑换的能够跨链返回成功，最后兑换的部分将无法成功。
+When the cross-chain tokens were sent back to the original chain, the number of native tokens that can be unescrowed is less than the total number of cross-chain tokens issued by the counterparty chain. The earlier exchange will be successful, and the last exchange will be failed.
