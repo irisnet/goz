@@ -24,7 +24,7 @@ In those scenes, all hubs use the official gaia version of goz-phase-3, without 
   - port: `transfer`
   - channel: `othergozchann`
 
-- irishub
+- otherhub
   - port: `transfer`
   - channel: `gozotherchann`
 
@@ -55,9 +55,9 @@ In those scenes, all hubs use the official gaia version of goz-phase-3, without 
 
 ### Scene 1
 
-Alice has `10uiris` on irishub, Bob wants to buy `3uiris`. IBC connection has been established between irishub and gozhub, to facilitate asset management, Bob decides that all assets are stored in the account on gozhub. The transaction method is cross-chain transfer from Alice's account on irishub to Bob's account on gozhub.
+IBC connection has been established between irishub and gozhub, to facilitate token transfers. Alice owns `10uiris` on irishub, Bob has reached a deal with Alice to receive `3uiris` from her, and would like to have the tokens stored his account on gozhub. The transaction method is cross-chain transfer from Alice's account on irishub to Bob's account on gozhub.
 
-Alice only transferred `1uiris` via cross-chain transaction, but successfully transferred `3transfer/gozirischann/uiris` to Bob’s account on gozhub through the deceptive relay method. But Bob didn't know that and he thought his token was correct.
+Alice only transferred `1uiris` via cross-chain transaction, but successfully transferred `3transfer/gozirischann/uiris` to Bob’s account on gozhub through the deceptive relay method. But Bob didn't know that and he thought the tokens received were genuine.
 
 ![scene1](./asset/scene1.png)
 
@@ -88,7 +88,7 @@ Balance status at the end of the scene:
 
 After a period of time, the market changed and Bob and Charlie reached a deal to transfer `3transfer/gozirischann/uiris` in their hands. Charlie's assets are mainly in otherhub, and otherhub has also successfully established a connection with gozhub. The transaction method is cross-chain transfer from Bob's account on gozhub to Charlie's account on otherhub.
 
-After the transaction, Charlie successfully received `3transfer/othergozchann/transfer/gozirischann/uiris` on otherhub. Charlie is unaware of the transaction between Alice and Bob, and believes that the received token is equivalent to `3uiris` on irishub.
+After the transaction, Charlie successfully received `3transfer/othergozchann/transfer/gozirischann/uiris` on otherhub. Charlie is unaware of the transaction between Alice and Bob, and believes that the received tokens are equivalent to `3uiris` on irishub.
 
 ![scene2](./asset/scene2.png)
 
@@ -119,7 +119,7 @@ Balance status at the end of the scene:
 
 After a while, Bob decides to buy back the token transferred to Charlie. Charlie transferred `3transfer/othergozchann/transfer/gozirischann/uiris` on otherhub to Bob's account on gozhub.
 
-The transaction was successfully completed, and the forged token in scene 1 can be circulated normally in the IBC network.
+The transaction was successfully completed, and the forged tokens in scene 1 can be circulated normally in the IBC network.
 
 ![scene3](./asset/scene3.png)
 
@@ -208,8 +208,8 @@ Balance status at the end of the scene:
 
 ## Conclusion
 
-The final result is that Dave can't get his assets back, and Alice has invaded `2uiris` which should belong to Dave.
+The final result is that Dave can't get his tokens back, and Alice has taken possession of `2uiris` that should belong to Dave.
 
 In scene 1, the fake tokens issued by Alice on gozhub are exactly the same as normal cross-chain tokens and can be circulated normally in the entire IBC network.
 
-When the cross-chain tokens were sent back to the original chain, the number of native tokens that can be unescrowed is less than the total number of cross-chain tokens issued by the counterparty chain. The earlier exchange will be successful, and the last exchange will be failed.
+When the cross-chain tokens were sent back to the original chain, the number of native tokens that can be unescrowed is less than the total number of cross-chain tokens issued by the counterparty chain. The earlier exchanges were successful, but the last exchange would fail.
