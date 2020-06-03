@@ -59,7 +59,7 @@ Alice has `10uiris` on irishub, Bob wants to buy `3uiris`. IBC connection has be
 
 Alice only transferred `1uiris` via cross-chain transaction, but successfully transferred `3transfer/gozirischann/uiris` to Bob’s account on gozhub through the deceptive relay method. But Bob didn't know that and he thought his token was correct.
 
-![scene1](/asset/scene1.png)
+![scene1](./asset/scene1.png)
 
 Balance status at the end of the scene:
 
@@ -90,7 +90,7 @@ After a period of time, the market changed and Bob and Charlie reached a deal to
 
 After the transaction, Charlie successfully received `3transfer/othergozchann/transfer/gozirischann/uiris` on otherhub. Charlie is unaware of the transaction between Alice and Bob, and believes that the received token is equivalent to `3uiris` on irishub.
 
-![scene2](/asset/scene2.png)
+![scene2](./asset/scene2.png)
 
 Balance status at the end of the scene:
 
@@ -121,7 +121,7 @@ After a while, Bob decides to buy back the token transferred to Charlie. Charlie
 
 The transaction was successfully completed, and the forged token in scene 1 can be circulated normally in the IBC network.
 
-![scene3](/asset/scene3.png)
+![scene3](./asset/scene3.png)
 
 Balance status at the end of the scene:
 
@@ -150,7 +150,7 @@ Balance status at the end of the scene:
 
 Dave has `10uiris` on irishub. One day his friend Eve wants to borrow `2uiris` on gozhub. Dave transferred 2uiris on irishub to Eve's account on gozhub via cross-chain transaction. After the transaction is completed, Eve received `2transfer/gozirischann/uiris` on gozhub.
 
-![scene4](/asset/scene4.png)
+![scene4](./asset/scene4.png)
 
 Balance status at the end of the scene:
 
@@ -181,7 +181,7 @@ After a period of time, the market changed, Alice bought back all Bob's uiris. T
 
 Soon after, Eve decided to pay back Dave’s uiris, then Eve transferred `2transfer/gozirischann/uiris` on gozhub to Dave’s account on irishub via cross-chain transsaction. Eve successfully sent the transaction on gozhub, the account balance decreased by `2transfer/gozirischann/uiris`. But Dave could not receive the token. Though the packet was successful relayed, the balance of escrow account was insufficient during the execution of the packet.
 
-![scene5](/asset/scene5.png)
+![scene5](./asset/scene5.png)
 
 Balance status at the end of the scene:
 
