@@ -1,12 +1,12 @@
-# Deceptive And Fix
+# Deceptive Relay And Fix
 
-This article described the method and fix of `deceptive relay` in ICS-20 [Abnormal Scenes](./scenes.md) we write before.
+This article describes the problem and fix of `deceptive relay` in ICS-20 [Abnormal Scenes](./scenes.md) we wrote before.
 
-## deceptive relay
+## Deceptive relay
 
-ICS20 packets sent through unordered channel can be repeated relayed, causes the number of cross-chain tokens minted on counterparty chain is greater than the number of escrowed native tokens on source chain.
+ICS20 packets sent through unordered channel can be repeatedly relayed, causing more tokens minted on the counterparty chain than what's escrowed on the  source chain.
 
-For unordered channel, the chain will save packet acknowledgement after receiving the packet. And the chain should check whether the packet has been received before packet execution.
+For unordered channel, a blockchain will save a corresponding acknowledgement after receiving a packet. And the blockchain should check whether a received packet has already been processed before executing the packet.
 
 https://github.com/cosmos/cosmos-sdk/blob/master/x/ibc/04-channel/keeper/packet.go#L243
 
@@ -28,11 +28,11 @@ func (k Keeper) PacketExecuted(
 }
 ```
 
-In `PacketExecuted()`, it only stores PacketAcknowledgement without check whether the PacketAcknowledgement exists. So all packets can be received repeatedly. We have fixed this bug here: https://github.com/cosmos/cosmos-sdk/pull/6337
+In `PacketExecuted()`, it only stores PacketAcknowledgement without checking whether a PacketAcknowledgement already exists. So all packets can be executed repeatedly. We have fixed this bug here: https://github.com/cosmos/cosmos-sdk/pull/6337
 
-### relayer
+### Relayer
 
-For unordered channel, cmd `rly tx rly [path]` and `rly start [path]` will relay all packets every time they are executed, whether they have been relayed or not.
+For unordered channel, cmd `rly tx rly [path]` and `rly start [path]` will relay all packets no matter they have been relayed or not.
 
 In ordered channel, receive-sequence and send-sequence must be sequential, so we can get the unrelayed sequences by `[src-next-send-seq] - [dst-next-recv-seq]`.
 
@@ -40,7 +40,7 @@ But for unordered channel, we can only get `src-next-send-seq`. So we can't get 
 
 We resolved this problem here: https://github.com/iqlusioninc/relayer/pull/271
 
-We filter the sequences by whether the acknowledgement of packet exists, so that relayer can work normally.
+We filter the sequences by whether the packet acknowledgements exist, so that relayer can work correctly.
 
 ```go
 func newRlySeq(chain *Chain, start, end uint64, ordered bool, height uint64) []uint64 {
