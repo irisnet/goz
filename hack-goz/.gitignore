@@ -1,0 +1,4 @@
+.vscode
+build
+vendor
+__debug_bin
